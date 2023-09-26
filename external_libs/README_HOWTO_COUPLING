@@ -16,7 +16,7 @@ at line 32
 modify specfem3d_Git_devel/src/meshfem3D/save_databases.F90
 line 112 
 logical, parameter :: SAVE_MESH_AS_CUBIT = .true.
-
+now this option is in the file DATA/meshfem3D_files/Mesh_Par_file
 
 make all -j 8 
 
