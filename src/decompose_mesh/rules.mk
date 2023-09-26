@@ -150,6 +150,7 @@ $E/xdecompose_mesh: ${SCOTCH_DIR}/include/scotchf.h $(decompose_mesh_SHARED_OBJE
 xdecompose_mesh_mpi_OBJECTS = \
 	$O/decompose_mesh_par.dec_module.o \
 	$O/fault_scotch.dec_module.o \
+	$O/part_decompose_mesh.dec_module.o \
 	$O/module_qsort.dec.o \
 	$O/module_database.dec.o \
 	$O/module_mesh.dec.o \
