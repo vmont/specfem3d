@@ -1034,8 +1034,20 @@
   ! absorbing boundary surface
   dset_name = "num_abs_boundary_faces" ! 1 i (/myrank/)
   call h5_write_dataset_collect_hyperslab(dset_name, (/num_abs_boundary_faces/), (/myrank/),if_col)
-
+  
   if (sum(offset_num_abs_boundary_faces) > 0) then
+    ! VM VM : to be consistent with reading hdf5 database, myrank with no data should no write 
+    ! in hdf5 file, thus allocation with 0 size array prevent to write something.
+    if (num_abs_boundary_faces == 0) then
+      ! VM VM : the arrays were already allocated with dummy size to 1 
+      deallocate(abs_boundary_ispec,abs_boundary_ijk, &
+                 abs_boundary_jacobian2Dw,abs_boundary_normal)
+      ! VM VM : re-allocate the arrays with size 0 to avoid writing dummy value in 
+      ! hdf5 database
+      allocate(abs_boundary_ispec(0),abs_boundary_ijk(0,0,0), &
+               abs_boundary_jacobian2Dw(0,0),abs_boundary_normal(0,0,0),stat=ier)
+      if (ier /= 0) stop 'Error allocating dummy arrays'
+    end if
     dset_name = "abs_boundary_ispec" ! 1 i (/offset_num_abs_boundary_faces/)
     call h5_write_dataset_collect_hyperslab(dset_name, abs_boundary_ispec, &
             (/sum(offset_num_abs_boundary_faces(0:myrank-1))/),if_col)
@@ -1135,6 +1147,18 @@
   call h5_write_dataset_collect_hyperslab(dset_name, (/num_free_surface_faces/), (/myrank/),if_col)
 
   if (sum(offset_num_free_surface_faces) > 0) then
+    ! VM VM : to be consistent with reading hdf5 database, myrank with no data should no write 
+    ! in hdf5 file, thus allocation with 0 size array prevent to write something.
+    if (num_free_surface_faces == 0) then
+      ! VM VM : the arrays were already allocated with dummy size to 1 
+      deallocate(free_surface_ispec,free_surface_ijk, &
+                 free_surface_jacobian2Dw,free_surface_normal) 
+      ! VM VM : re-allocate the arrays with size 0 to avoid writing dummy value in 
+      ! hdf5 database           
+      allocate(free_surface_ispec(0),free_surface_ijk(0,0,0), &
+               free_surface_jacobian2Dw(0,0),free_surface_normal(0,0,0),stat=ier)
+    if (ier /= 0) stop 'Error allocating dummy arrays'
+    end if
     dset_name = "free_surface_ispec" ! 1 i (/offset_num_free_surface_faces/)
     call h5_write_dataset_collect_hyperslab(dset_name, free_surface_ispec, &
             (/sum(offset_num_free_surface_faces(0:myrank-1))/),if_col)

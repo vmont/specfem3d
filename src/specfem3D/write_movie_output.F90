@@ -167,7 +167,11 @@
   enddo
 
   ! saves surface movie snapshot
+#ifdef USE_HDF5
+  call wmo_movie_save_surface_snapshot_hdf5()
+#else
   call wmo_movie_save_surface_snapshot()
+#endif
 
   end subroutine wmo_movie_surface_output
 
@@ -374,7 +378,11 @@
   enddo
 
   ! saves shakemap only at the end of the simulation
+#ifdef USE_HDF5 
+  if (it == NSTEP) call wmo_save_shakemap_hdf5()
+#else
   if (it == NSTEP) call wmo_save_shakemap()
+#endif
 
   end subroutine wmo_create_shakemap
 
@@ -661,7 +669,11 @@
   endif
 
   ! saves movie snapshot
+#ifdef USE_HDF5
+  call wmo_movie_save_volume_snapshot_hdf5()
+#else
   call wmo_movie_save_volume_snapshot()
+#endif
 
   end subroutine wmo_movie_volume_output
 
