@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# example of installation script with GPU volta with gun compiler on jean-zay
+# example of installation script for GPU volta with intel compiler on jean-zay (IDIRS)
 
 
 # load all necessary modules 
