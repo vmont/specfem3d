@@ -17,6 +17,6 @@ mpi_inc=$CRAY_MPICH_DIR/include
 ./configure  CXX=$CC CC=$cc FC=$fc MPIFC=$mpifc --with-hip=$hip_flag MPI_INC=$mpi_inc
 	     
 
-# make (only direct solver and basic tools) or make all full applcation with axisem coupling 
+# make or make all for full applcation with all tools
 make 
 

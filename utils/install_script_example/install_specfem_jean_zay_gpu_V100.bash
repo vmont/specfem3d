@@ -40,6 +40,6 @@ cuda_flag=cuda9
 ./configure CC=$cc FC=$fc MPIFC=$mpifc --with-mpi --with-cuda=$cuda_flag 
 
 
-# make (only direct solver and basic inversion) or make all full applcation with axisem coupling 
+# make or make all for full applcation with all tools
 make 
 
