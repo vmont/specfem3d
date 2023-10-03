@@ -878,8 +878,8 @@ contains
     ! div and curl on elemental level
     call elm2node_base(div,div_on_node)
     call elm2node_base(curl_x,curl_x_on_node)
-    call elm2node_base(curl_x,curl_x_on_node)
-    call elm2node_base(curl_x,curl_x_on_node)
+    call elm2node_base(curl_y,curl_y_on_node)
+    call elm2node_base(curl_z,curl_z_on_node)
 
     ! writes our divergence/curl
     ! hdf5 i/o server
